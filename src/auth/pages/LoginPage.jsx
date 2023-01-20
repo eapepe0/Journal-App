@@ -14,17 +14,19 @@ import { checkingAuthentication, startGoogleSignIn, startLoginWithEmailPassword 
 import { useMemo } from "react";
 
 
+const formData = {
+	email: "",
+	password: "",
+}
+
 export const LoginPage = () => {
 
 	const dispatch = useDispatch();
 	const { status, errorMessage } = useSelector(state => state.auth);
 	//sacamos del state , el status (guarda si salio bien o no la operacion y el error)
 
-	const { email, password, onInputChange } = useForm({
-		email: "eapepe0@gmail.com",
-		password: "123456",
-	});
-
+	const { email, password, onInputChange } = useForm(formData);
+	// con la actualizacion en el useForm con el useEffect dispara un loop infinito
 	const isAuthenticating = useMemo(() => status === 'checking', [status]);
 	// memoriza y se fija si el status se esta checkeando , se ejecuta cada vez que cambia el status
 

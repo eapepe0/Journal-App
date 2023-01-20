@@ -8,6 +8,10 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
     createValidators();
   }, [formState]);
 
+  useEffect(() => {
+    setFormState(initialForm); // cada vez que cambia el initialForm , se vuelve a crear el formulario
+  }, [initialForm]); // es util si tenemos que cambiar un form
+
   const isFormValid = useMemo(() => {
     for (const formValue of Object.keys(formValidation)) {
       if (formValidation[formValue] !== null) return false;
