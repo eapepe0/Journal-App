@@ -100,5 +100,5 @@ export const loginWithEmailPassword = async ({ email, password }) => {
 };
 
 export const logoutFirebase = async () => {
-  return await FirebaseAuth.signOut();
+  return await FirebaseAuth.signOut(); // llamaos la funcion de FireBase para que nos deslogue
 };
