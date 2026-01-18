@@ -8,8 +8,10 @@ import { CheckingAuth } from '../ui';
 export const AppRouter = () => {
 
 	const { status } = useCheckAuth();
-	if (status === 'checking') {
+	// revisamos el estado de autenticacion
+	if (status === 'checking') { // en un momento el estado se pasa a checkear 
 		return <CheckingAuth />
+		// mostramos el componente que genera un loading
 	}
 	return (
 		<Routes>
@@ -17,8 +19,10 @@ export const AppRouter = () => {
 				(status === 'authenticated')
 					?
 					<Route path="/*" element={<JournalRoutes />} />
+					// si estamos autenticados vamos a las rutas del Journal
 					:
 					<Route path="/auth/*" element={<AuthRoutes />} />
+				// si no estamos autenticados vamos a las rutas de Auth (login o register)
 			}
 			<Route path='/*' element={<Navigate to='/auth/login' />} />
 		</Routes>

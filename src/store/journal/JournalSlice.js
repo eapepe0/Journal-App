@@ -18,13 +18,16 @@ export const journalSlice = createSlice({
       state.isSaving = false;
     },
     setActiveNote: (state, action) => {
+      //ponemos en el estado active , la nota enviada , y borramos el estado menssageSaved
       state.active = action.payload;
       state.messageSaved = "";
     },
     setNotes: (state, action) => {
       state.notes = action.payload;
+      // ponemos en notes, el payload que le enviamos
     },
     setSaving: (state) => {
+      // mostramos que gardamos y
       state.isSaving = true;
       state.messageSaved = "";
     },

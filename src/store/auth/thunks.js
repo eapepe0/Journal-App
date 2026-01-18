@@ -40,17 +40,24 @@ export const startCreatingUserWithEmailPassword = ({
         password,
         displayName,
       });
+    // cremos un usuario con Email
     if (!ok) return dispatch(logout({ errorMessage }));
+    // si no devuelve el ok , es que hubo algun error , salimos
     dispatch(login({ uid, displayName, email, photoURL }));
+    // de lo contrario nos logueamos
   };
 };
 
 export const startLoginWithEmailPassword = ({ email, password }) => {
   return async (dispatch) => {
     dispatch(checkingCredentials());
+    // verificamos las credenciales
     const result = await loginWithEmailPassword({ email, password });
+    // nos logueamos con email y password
     if (!result.ok) return dispatch(logout(result));
+    // si el resultado es falso , salimos
     dispatch(login(result));
+    // si no los logueamos
   };
 };
 

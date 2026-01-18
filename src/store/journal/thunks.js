@@ -20,6 +20,7 @@ export const startNewNote = () => {
 
     const { uid } = getState().auth; // obtenemos el uid del usuario
 
+    // formato del newNote
     const newNote = {
       title: "",
       body: "",
@@ -28,26 +29,29 @@ export const startNewNote = () => {
     };
 
     const newDoc = doc(collection(FirebaseDB, `${uid}/journal/notes`));
+    // obtenemos un objeto donde creamos la coleccion (ruta donde se van a crear notas de FireBase)
     const resp = await setDoc(newDoc, newNote);
-
-    // dispatch
+    // creamos el objeto en FireBase
 
     newNote.id = newDoc.id;
-    //newNote
+    //newNote creo un id , donde sera igual al id de newDoc
 
     // dispatch activar Nota
     dispatch(addNewEmptyNotes(newNote));
-
+    // pusheamos el objeto newNote (objeto vacio , solo tiene un id , y una fecha) al estado note , ponemos isSaving en false
     dispatch(setActiveNote(newNote));
+    //le decimos a activeNote que la nota activa sera newNote , esta nota estaremos visualizando , una nota vacia
   };
 };
 
 export const startLoadingNotes = () => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
+    // obtenemos el uid
     const notas = await loadNotes(uid);
-
+    // devuelve las notas que tiene ese uid (usuario)
     dispatch(setNotes(notas));
+    // ponemos en notas el payload que le enviamos
   };
 };
 
@@ -88,8 +92,6 @@ export const startDeletingNotes = () => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth; // solicitamos de authSlice el uid
     const { active: note } = getState().journal; // renombramos active como note , lo sacamos del JournalSlice
-
-    console.log({ uid, note });
 
     const docRef = doc(FirebaseDB, `${uid}/journal/notes/${note.id}`); // preparamos para borrar
     await deleteDoc(docRef); // borramos de firebase

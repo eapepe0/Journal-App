@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkingAuthentication, startGoogleSignIn, startLoginWithEmailPassword } from "../../store/auth";
 import { useMemo } from "react";
 
-
+// datos por defecto del Form
 const formData = {
 	email: "",
 	password: "",
@@ -36,12 +36,13 @@ export const LoginPage = () => {
 		// cuando apretamos el boton login , se envia el dispatch de start...
 	};
 	const onGoogleSignIn = () => {
+		console.log('On GoogleSignIn')
 		dispatch(startGoogleSignIn())
 		// si se aprieta el boton google, se dispara la funcion
 	};
 	return (
 		<AuthLayout title="Login">
-			<form onSubmit={onSubmit} className='animate__animated animate__fadeIn animate__faster'
+			<form onSubmit={onSubmit} className='animate__animated animate__fadeIn animate__faster' test-id='submit-form'
 			>
 				<Grid container>
 					<Grid item xs={12} sx={{ my: 1 }}>
@@ -78,7 +79,7 @@ export const LoginPage = () => {
 							</Button>
 						</Grid>
 						<Grid item xs={12} sm={6}>
-							<Button variant="contained" fullWidth onClick={onGoogleSignIn} disabled={isAuthenticating}>
+							<Button variant="contained" fullWidth onClick={onGoogleSignIn} disabled={isAuthenticating} aria-label='google-btn'>
 								<Google />
 								<Typography sx={{ ml: 1 }}>Google</Typography>
 							</Button>

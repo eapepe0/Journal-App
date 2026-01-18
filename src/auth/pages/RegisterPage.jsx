@@ -29,9 +29,9 @@ const formValidations = {
 export const RegisterPage = () => {
 	const dispatch = useDispatch();
 
-	const [formSubmitted, setFormSubmitted] = useState(false);
+	const [formSubmitted, setFormSubmitted] = useState(false); // creamos un estado donde formSubmitted es falso y su funcion 
 
-	const { status, errorMessage } = useSelector(state => state.auth);
+	const { status, errorMessage } = useSelector(state => state.auth); // extraemos el status y errorMessage de authSlice
 
 	const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
 	const {

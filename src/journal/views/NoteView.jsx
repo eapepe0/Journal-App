@@ -41,19 +41,21 @@ export const NoteView = () => {
 
 	const onSaveNote = () => {
 		dispatch(startSaveNotes())
+		//guardamos las notas
 	}
 
 	const onFileInputChange = ({ target }) => {
-		console.log(target.files)
 		if (target.files === 0) return // si no hay ningun archivo seleccionado no hace nada
 		const file = target.files;
 		if (file) {
 			dispatch(startUploadingFiles(file))
+			// enpezamos a cargar los archivos
 		}
 	}
 
 	const onDelete = () => {
 		dispatch(startDeletingNotes())
+		// empezamos a borrar
 	}
 
 	return (
